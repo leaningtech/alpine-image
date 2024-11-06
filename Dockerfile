@@ -14,8 +14,10 @@ COPY --chown=root:root ./sys_hack /sys
 COPY --chown=root:root ./run_hack /run
 
 # useful apps
-RUN apk add xpdf rofi gvim okular xterm pcmanfm
+RUN apk add xpdf rofi gvim okular xterm pcmanfm feh
 
+# assets
+COPY --chown=user:user ./data /home/user/data
 # i3 config
 COPY --chown=user:user ./config /home/user/.config
 

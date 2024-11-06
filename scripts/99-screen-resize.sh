@@ -6,4 +6,7 @@ while true; do
 	# Resize the screen
 	xrandr --output None-0 --off
 	xrandr --auto
+	if [ -f ~/.fehbg ]; then
+		~/.fehbg &
+	fi
 done &
