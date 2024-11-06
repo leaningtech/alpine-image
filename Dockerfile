@@ -9,9 +9,14 @@ RUN adduser -D -s /bin/ash user && echo 'user:password' | chpasswd
 RUN sed -i "s/#autologin-user=/autologin-user=user/g" /etc/lightdm/lightdm.conf && sed -i "s/#autologin-user-timeout=0/autologin-user-timeout=0/g" /etc/lightdm/lightdm.conf && sed -i "s/#autologin-session=/autologin-session=i3/g" /etc/lightdm/lightdm.conf
 # Add a script to support display autoresizing
 COPY --chown=user:user ./scripts/99-screen-resize.sh /etc/X11/xinit/xinitrc.d/99-screen-resize.sh
-# i3 config
-COPY --chown=user:user ./config /home/user/.config
 # Temporary hacks for input detection
 COPY --chown=root:root ./sys_hack /sys
 COPY --chown=root:root ./run_hack /run
+
+# useful apps
+RUN apk add xpdf rofi gvim okular xterm pcmanfm
+
+# i3 config
+COPY --chown=user:user ./config /home/user/.config
+
 CMD [ "/bin/sh" ]
