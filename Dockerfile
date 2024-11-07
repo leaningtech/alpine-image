@@ -20,5 +20,7 @@ RUN apk add i3status xpdf rofi gvim okular xterm pcmanfm feh
 COPY --chown=user:user ./data /home/user/data
 # i3 config
 COPY --chown=user:user ./config /home/user/.config
+# xpdf config goes directly in the home dir
+RUN mv /home/user/.config/.xpdfrc /home/user/
 
 CMD [ "/bin/sh" ]
