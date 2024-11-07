@@ -165,5 +165,5 @@ gaps inner all set 3px
 #        status_command i3status
 #}
 
-exec --no-startup-id feh --bg-fill --geometry -0-0 ~/data/background3.png
 exec --no-startup-id polybar
+exec --no-startup-id feh --bg-fill --geometry -0-0 /web/background3.png
