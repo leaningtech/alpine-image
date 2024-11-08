@@ -83,6 +83,10 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
+# kill the window
+# it does not seem to work
+bindsym button2 kill
+
 # focus the child container
 #bindsym $mod+d focus child
 

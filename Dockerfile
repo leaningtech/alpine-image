@@ -1,5 +1,7 @@
 FROM i386/alpine:3.17
 # Install required packages
+
+RUN echo -e "\n@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk update && apk add alpine-base udev-init-scripts udev-init-scripts-openrc eudev xorg-server xf86-input-libinput lightdm i3wm font-dejavu xrandr xev
 # Setup the init script
 RUN rc-update add bootmisc boot && rc-update add udev sysinit && rc-update add udev-trigger sysinit && rc-update add udev-settle sysinit && rc-update add udev-postmount default && rc-update add dbus default && rc-update add lightdm default
@@ -14,7 +16,10 @@ COPY --chown=root:root ./sys_hack /sys
 COPY --chown=root:root ./run_hack /run
 
 # useful apps
-RUN apk add xpdf rofi gvim xterm pcmanfm feh polybar thunar aisleriot
+RUN apk add xpdf rofi gvim xterm pcmanfm feh polybar thunar sgt-puzzles@testing
+
+# the sgt-puzzles package has broken desktop files...
+RUN sed -i 's/Exec=sgt-/Exec=/' /usr/share/applications/sgt-*.desktop
 
 # assets
 COPY --chown=user:user ./data /home/user/data
