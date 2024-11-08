@@ -16,9 +16,9 @@ COPY --chown=root:root ./sys_hack /sys
 COPY --chown=root:root ./run_hack /run
 
 # terminal apps
-RUN apk add vim python3 nodejs ruby gcc
+RUN apk add vim python3 nodejs gcc
 # gui apps
-RUN apk add xpdf rofi gvim xterm pcmanfm feh polybar thunar sgt-puzzles@testing
+RUN apk add xpdf rofi gvim gedit xterm pcmanfm feh polybar thunar sgt-puzzles@testing
 
 # the sgt-puzzles package has broken desktop files...
 RUN sed -i 's/Exec=sgt-/Exec=/' /usr/share/applications/sgt-*.desktop
