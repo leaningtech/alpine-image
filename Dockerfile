@@ -1,4 +1,4 @@
-FROM i386/alpine:3.17
+FROM docker.io/i386/alpine:3.17
 # Install required packages
 
 RUN echo -e "\n@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
