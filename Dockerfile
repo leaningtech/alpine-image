@@ -22,7 +22,7 @@ RUN apk add xpdf rofi gvim xterm pcmanfm feh polybar thunar sgt-puzzles@testing
 RUN sed -i 's/Exec=sgt-/Exec=/' /usr/share/applications/sgt-*.desktop
 
 # assets
-COPY --chown=user:user ./data /home/user/data
+COPY --chown=user:user ./assets /home/user/assets
 # i3 config
 COPY --chown=user:user ./config /home/user/.config
 # xpdf config goes directly in the home dir
