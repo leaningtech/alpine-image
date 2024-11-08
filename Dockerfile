@@ -2,11 +2,11 @@ FROM i386/alpine:3.17
 # Install required packages
 
 RUN echo -e "\n@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
-RUN apk update && apk add alpine-base udev-init-scripts udev-init-scripts-openrc eudev xorg-server xf86-input-libinput lightdm i3wm font-dejavu xrandr xev
+RUN apk update && apk add alpine-base udev-init-scripts udev-init-scripts-openrc eudev xorg-server xf86-input-libinput lightdm i3wm font-dejavu xrandr xev bash
 # Setup the init script
 RUN rc-update add bootmisc boot && rc-update add udev sysinit && rc-update add udev-trigger sysinit && rc-update add udev-settle sysinit && rc-update add udev-postmount default && rc-update add dbus default && rc-update add lightdm default
 # Add a user
-RUN adduser -D -s /bin/ash user && echo 'user:password' | chpasswd
+RUN adduser -D -s /bin/bash user && echo 'user:password' | chpasswd
 # Configure lightdm to start i3
 RUN sed -i "s/#autologin-user=/autologin-user=user/g" /etc/lightdm/lightdm.conf && sed -i "s/#autologin-user-timeout=0/autologin-user-timeout=0/g" /etc/lightdm/lightdm.conf && sed -i "s/#autologin-session=/autologin-session=i3/g" /etc/lightdm/lightdm.conf
 # Add a script to support display autoresizing
@@ -15,7 +15,9 @@ COPY --chown=user:user ./scripts/99-screen-resize.sh /etc/X11/xinit/xinitrc.d/99
 COPY --chown=root:root ./sys_hack /sys
 COPY --chown=root:root ./run_hack /run
 
-# useful apps
+# terminal apps
+RUN apk add vim python3 nodejs ruby gcc
+# gui apps
 RUN apk add xpdf rofi gvim xterm pcmanfm feh polybar thunar sgt-puzzles@testing
 
 # the sgt-puzzles package has broken desktop files...
