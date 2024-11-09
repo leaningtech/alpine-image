@@ -2,6 +2,8 @@ FROM docker.io/i386/alpine:3.17
 # Install required packages
 
 RUN echo -e "\n@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+# Default DNS server
+RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf
 RUN apk update && apk add alpine-base udev-init-scripts udev-init-scripts-openrc eudev xorg-server xf86-input-libinput lightdm i3wm font-dejavu xrandr xev bash
 # Setup the init script
 RUN rc-update add bootmisc boot && rc-update add udev sysinit && rc-update add udev-trigger sysinit && rc-update add udev-settle sysinit && rc-update add udev-postmount default && rc-update add dbus default && rc-update add lightdm default

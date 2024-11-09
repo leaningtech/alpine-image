@@ -52,7 +52,7 @@ echo "Size: $size"
 # Privileged section running in a namespace
 buildah unshare bash << EOF
 set -eu
-img=\$(buildah bud --quiet --layers -f ${dockerfile})
+img=\$(buildah bud --dns=none --quiet --layers -f ${dockerfile})
 
 cnt=\$(buildah from \$img)
 mnt=\$(buildah mount \$cnt)
