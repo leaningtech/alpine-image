@@ -15,12 +15,9 @@ RUN echo 'root:password' | chpasswd
 RUN sed -i "s/#autologin-user=/autologin-user=user/g" /etc/lightdm/lightdm.conf && sed -i "s/#autologin-user-timeout=0/autologin-user-timeout=0/g" /etc/lightdm/lightdm.conf && sed -i "s/#autologin-session=/autologin-session=i3/g" /etc/lightdm/lightdm.conf
 # Add a script to support display autoresizing
 COPY --chown=user:user ./scripts/99-screen-resize.sh /etc/X11/xinit/xinitrc.d/99-screen-resize.sh
-# Temporary hacks for input detection
-COPY --chown=root:root ./sys_hack /sys
-COPY --chown=root:root ./run_hack /run
 
 # terminal apps
-RUN apk add vim python3 nodejs gcc
+RUN apk add vim python3 nodejs gcc nano openssh
 # gui apps
 RUN apk add xpdf rofi gvim gedit xterm pcmanfm feh polybar thunar sgt-puzzles@testing
 
