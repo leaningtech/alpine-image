@@ -28,5 +28,8 @@ RUN sed -i 's/Exec=sgt-/Exec=/' /usr/share/applications/sgt-*.desktop
 COPY --chown=user:user ./config /home/user/.config
 # xpdf config goes directly in the home dir
 RUN mv /home/user/.config/.xpdfrc /home/user/
+# xpdf package is missing the .desktop file
+RUN mv /home/user/.config/xpdf.desktop /usr/share/applications/
+RUN mv /home/user/.config/.Xresources /home/user/
 
 CMD [ "/bin/sh" ]
